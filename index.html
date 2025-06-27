@@ -1,0 +1,115 @@
+ 
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可以原谅我吗？</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            flex-direction: column;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #no {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .heart {
+            font-size: 0;
+            color: red;
+            text-align: center;
+            transition: all 0.5s;
+            margin-top: 20px;
+        }
+        
+        .show {
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>可以原谅我吗？</h1>
+    <div class="buttons">
+        <button id="yes">可以</button>
+        <button id="no">不行</button>
+    </div>
+    <div class="heart" id="heart">❤️</div>
+
+    <script>
+        const yesBtn = document.getElementById('yes');
+        const noBtn = document.getElementById('no');
+        const heart = document.getElementById('heart');
+        
+        let noCount = 0;
+        let yesSize = 18;
+        let noSize = 18;
+        
+        noBtn.addEventListener('click', function() {
+            noCount++;
+            
+            // 增加"不行"按钮的大小
+            noSize += 10;
+            noBtn.style.fontSize = `${noSize}px`;
+            
+            // 减小"可以"按钮的大小，但最小保持10px
+            yesSize = Math.max(10, yesSize - 5);
+            yesBtn.style.fontSize = `${yesSize}px`;
+            
+            // 根据点击次数改变按钮文字
+            if(noCount === 1) {
+                noBtn.textContent = "真的不行";
+            } else if(noCount === 2) {
+                noBtn.textContent = "再考虑一下";
+            } else if(noCount === 3) {
+                noBtn.textContent = "拜托了";
+            } else if(noCount > 3) {
+                noBtn.textContent = "求求你了";
+            }
+        });
+        
+        yesBtn.addEventListener('click', function() {
+            heart.classList.add('show');
+            
+            // 隐藏按钮
+            yesBtn.style.display = 'none';
+            noBtn.style.display = 'none';
+            
+            // 改变标题文字
+            document.querySelector('h1').textContent = '谢谢你原谅我！';
+        });
+    </script>
+</body>
+</html>
+ 
